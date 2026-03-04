@@ -2,198 +2,206 @@
 <html lang="id">
 <head>
     <link rel="icon" href="https://fav.farm/🎂" />
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Rossa Amelia Iskandar ❤️</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(180deg, #1a1a2e, #3a1c71, #ff758c);
+            color: white;
+            overflow: hidden;
+        }
 
-<title>For Rossa Amelia Iskandar ❤️</title>
+        /* SCREEN SYSTEM */
+        .screen {
+            text-align: center;
+            display: none;
+            padding: 20px;
+            animation: fadeIn 0.8s ease;
+        }
 
-<style>
-body{
-margin:0;
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-font-family:Poppins,sans-serif;
-background:linear-gradient(180deg,#1a1a2e,#3a1c71,#ff758c);
-color:white;
-overflow:hidden;
-}
+        .active {
+            display: block;
+        }
 
-/* SCREEN */
-.screen{
-text-align:center;
-display:none;
-}
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-.active{
-display:block;
-}
+        /* TEXT STYLES */
+        h2 { margin-bottom: 10px; }
+        p { font-size: 14px; opacity: 0.9; line-height: 1.5; }
 
-/* PASSWORD */
-input{
-padding:12px;
-border:none;
-border-radius:10px;
-outline:none;
-font-size:16px;
-text-align:center;
-}
+        /* BUTTONS & INPUT */
+        input {
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            outline: none;
+            font-size: 16px;
+            text-align: center;
+            margin-top: 15px;
+        }
 
-button{
-margin-top:10px;
-padding:10px 20px;
-border:none;
-border-radius:10px;
-background:#ff4d88;
-color:white;
-font-size:16px;
-cursor:pointer;
-}
+        button {
+            margin-top: 15px;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 10px;
+            background: #ff4d88;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 77, 136, 0.3);
+        }
 
-/* GAME */
-.grid{
-display:grid;
-grid-template-columns:repeat(4,70px);
-gap:12px;
-margin-top:15px;
-}
+        button:hover {
+            background: #ff2e70;
+            transform: scale(1.05);
+        }
 
-.card{
-width:70px;
-height:70px;
-background:#ffffff22;
-border-radius:12px;
-display:flex;
-justify-content:center;
-align-items:center;
-font-size:28px;
-cursor:pointer;
-transition:.3s;
-}
+        /* GAME GRID */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 70px);
+            gap: 12px;
+            margin-top: 15px;
+        }
 
-.card.flip{
-background:white;
-color:#ff4d88;
-}
+        .card {
+            width: 70px;
+            height: 70px;
+            background: #ffffff22;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 28px;
+            cursor: pointer;
+            transition: .3s;
+        }
 
-.card.matched{
-background:#ff4d88;
-color:white;
-}
-
-/* WIN */
-#win{
-margin-top:15px;
-font-size:18px;
-}
-</style>
+        .card.flip { background: white; color: #ff4d88; }
+        .card.matched { background: #ff4d88; color: white; }
+        #win { margin-top: 15px; font-size: 18px; }
+    </style>
 </head>
 
 <body>
 
-<!-- PASSWORD SCREEN -->
-<div id="login" class="screen active">
-<h2>Masukkan Tanggal Lahir Kamu</h2>
-<h2>(contoh: 01012006)💌</h2>
-<input type="password" id="pw" placeholder="Password...">
-<br>
-<button onclick="checkPw()">Masuk</button>
-<p id="error"></p>
-</div>
+    <div id="welcome" class="screen active">
+        <h2>Halo, Rossa Amelia Iskandar ❤️</h2>
+        <p>Aku punya sesuatu yang khusus buat kamu hari ini.<br>Siap buat lihat kejutannya?</p>
+        <button onclick="start()">Buka Kadonya ✨</button>
+    </div>
 
-<!-- GAME SCREEN -->
-<div id="game" class="screen">
-<h2>Memory Game 💖</h2>
-<div class="grid" id="grid"></div>
-<div id="win"></div>
-</div>
+    <div id="login" class="screen">
+        <h2>Verifikasi Dulu Ya.. 💌</h2>
+        <p>Masukkan tanggal lahir kamu buat lanjut contoh (12032006).</p>
+        <input type="password" id="pw" placeholder="DDMMYYYY...">
+        <br>
+        <button onclick="checkPw()">Masuk</button>
+        <p id="error" style="color: #ffdae0; margin-top: 10px;"></p>
+    </div>
 
-<script>
-const PASSWORD="22032010"; // GANTI PASSWORD DI SINI
+    <div id="game" class="screen">
+        <h2>Memory Game 💖</h2>
+        <p>Cari pasangan yang sama ya!</p>
+        <div class="grid" id="grid"></div>
+        <div id="win"></div>
+    </div>
 
-function checkPw(){
-let input=document.getElementById("pw").value;
+    <script>
+        const PASSWORD = "22032010"; // Password lo tetep sama
 
-if(input===PASSWORD){
-document.getElementById("login").classList.remove("active");
-document.getElementById("game").classList.add("active");
-}else{
-document.getElementById("error").innerText="Password salah 😢";
-}
-}
+        // Fungsi pindah dari Welcome ke Login
+        function start() {
+            document.getElementById("welcome").classList.remove("active");
+            document.getElementById("login").classList.add("active");
+        }
 
-/* GAME */
-const emojis=["💖","❤️","💕","💘","💝","💗",
-"💖","❤️","💕","💘","💝","💗"];
+        // Fungsi Cek Password
+        function checkPw() {
+            let input = document.getElementById("pw").value;
+            if (input === PASSWORD) {
+                document.getElementById("login").classList.remove("active");
+                document.getElementById("game").classList.add("active");
+            } else {
+                document.getElementById("error").innerText = "Ups! Password salah, masa tanggal ultah sendiri ga ingett 😢";
+            }
+        }
 
-let shuffled=emojis.sort(()=>0.5-Math.random());
-const grid=document.getElementById("grid");
+        /* --- LOGIC GAME MEMORY --- */
+        const emojis = ["💖", "❤️", "💕", "💘", "💝", "💗", "💖", "❤️", "💕", "💘", "💝", "💗"];
+        let shuffled = emojis.sort(() => 0.5 - Math.random());
+        const grid = document.getElementById("grid");
 
-let first=null;
-let second=null;
-let lock=false;
-let match=0;
+        let first = null;
+        let second = null;
+        let lock = false;
+        let match = 0;
 
-shuffled.forEach(e=>{
-const card=document.createElement("div");
-card.className="card";
-card.dataset.emoji=e;
-card.innerHTML="?";
+        shuffled.forEach(e => {
+            const card = document.createElement("div");
+            card.className = "card";
+            card.dataset.emoji = e;
+            card.innerHTML = "?";
 
-card.onclick=()=>{
+            card.onclick = () => {
+                if (lock || card.classList.contains("flip")) return;
 
-if(lock||card.classList.contains("flip"))return;
+                card.classList.add("flip");
+                card.innerHTML = e;
 
-card.classList.add("flip");
-card.innerHTML=e;
+                if (!first) {
+                    first = card;
+                    return;
+                }
 
-if(!first){
-first=card;
-return;
-}
+                second = card;
+                lock = true;
 
-second=card;
-lock=true;
+                if (first.dataset.emoji === second.dataset.emoji) {
+                    first.classList.add("matched");
+                    second.classList.add("matched");
+                    match++;
+                    reset();
 
-if(first.dataset.emoji===second.dataset.emoji){
+                    if (match === 6) {
+                        document.getElementById("win").innerHTML =
+                            `❤️ Kamu menang! ❤️ <br><br>
+                            <button onclick="nextPage()">Lanjut 💌</button>`;
+                    }
+                } else {
+                    setTimeout(() => {
+                        first.classList.remove("flip");
+                        second.classList.remove("flip");
+                        first.innerHTML = "?";
+                        second.innerHTML = "?";
+                        reset();
+                    }, 800);
+                }
+            };
+            grid.appendChild(card);
+        });
 
-first.classList.add("matched");
-second.classList.add("matched");
-match++;
-reset();
+        function reset() {
+            first = null;
+            second = null;
+            lock = false;
+        }
 
-if(match===6){
-document.getElementById("win").innerHTML=
-`
-❤️ Kamu menang ❤️ <br><br>
-<button onclick="nextPage()">Lanjut 💌</button>
-`;
-}
-
-}else{
-setTimeout(()=>{
-first.classList.remove("flip");
-second.classList.remove("flip");
-first.innerHTML="?";
-second.innerHTML="?";
-reset();
-},800);
-}
-};
-
-grid.appendChild(card);
-});
-
-function reset(){
-first=null;
-second=null;
-lock=false;
-}
-function nextPage(){
-window.location.href="buatoca.html";
-}
-</script>
-
+        function nextPage() {
+            window.location.href = "buatoca.html";
+        }
+    </script>
 </body>
 </html>
