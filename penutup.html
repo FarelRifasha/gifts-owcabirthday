@@ -4,141 +4,302 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Closing Letter</title>
+
 <style>
+
+/* ================= BODY ================= */
 body{
-  margin:0;
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:linear-gradient(135deg,#ff9ecb,#ffc1da,#ffd6e7);
-  font-family:"Courier New", monospace;
-  overflow:hidden;
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#ff9ecb,#ffc1da,#ffd6e7);
+font-family:"Courier New", monospace;
+overflow:hidden;
 }
 
-/* ================= BACKGROUND DECOR ================= */
+/* FLOAT ICON */
 .decor{
-  position:absolute;
-  width:100%;
-  height:100%;
-  overflow:hidden;
-  z-index:0;
+position:absolute;
+width:100%;
+height:100%;
+overflow:hidden;
 }
 
 .item{
-  position:absolute;
-  animation:floatUp linear infinite;
-  opacity:.7;
-  font-size:18px;
+position:absolute;
+animation:floatUp linear infinite;
+opacity:.7;
 }
 
 @keyframes floatUp{
-  from{transform:translateY(100vh) scale(.8); opacity:0;}
-  20%{opacity:.8;}
-  to{transform:translateY(-10vh) scale(1.2); opacity:0;}
+from{transform:translateY(100vh);}
+to{transform:translateY(-10vh);}
 }
 
-/* ================= CLOSING CARD ================= */
+/* ================= CARD ================= */
 .closing-card{
-  position:relative;
-  z-index:2;
-  background:white;
-  padding:45px 35px;
-  border-radius:15px;
-  text-align:center;
-  box-shadow:0 20px 60px rgba(0,0,0,.3);
-  opacity:0;
-  transform:translateY(40px);
-  transition:1.5s;
-  max-width:320px;
+background:white;
+padding:45px 35px;
+border-radius:15px;
+text-align:center;
+box-shadow:0 20px 60px rgba(0,0,0,.25);
+opacity:0;
+transform:translateY(40px);
+transition:1.5s;
+z-index:2;
 }
 
 .closing-card.show{
-  opacity:1;
-  transform:translateY(0);
+opacity:1;
+transform:translateY(0);
 }
 
-.closing-card h2{
-  margin:0;
-  font-size:24px;
-  color:#222;
+.nextSlideBtn{
+margin-top:20px;
+padding:12px 22px;
+border:none;
+border-radius:10px;
+background:#ff4d88;
+color:white;
+cursor:pointer;
 }
 
-.closing-card p{
-  margin-top:15px;
-  font-size:15px;
-  color:#555;
-  line-height:1.6;
+/* ================= MEMORY ================= */
+
+.memorySlide{
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle at top,#ffe6f0,#ffc1da 40%,#ff9ecb);
+opacity:0;
+pointer-events:none;
+transition:1.5s;
+overflow:hidden;
 }
 
-.heart{
-  font-size:40px;
-  margin:20px 0;
-  animation:beat 1.5s infinite;
+.memorySlide.show{
+opacity:1;
+pointer-events:auto;
 }
 
-.sign{
-  font-weight:bold;
-  color:black;
-  display:block;
-  margin-top:10px;
-  font-size:16px;
+/* GLOW */
+.pinkGlow{
+position:absolute;
+width:400px;
+height:400px;
+background:radial-gradient(circle,#ffffff66,transparent);
+filter:blur(120px);
+animation:floatGlow 12s infinite alternate;
 }
 
-.footer-note {
-  position: absolute;
-  bottom: 20px;
-  font-size: 10px;
-  color: #888;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  z-index: 5;
-  opacity: 0.6;
+@keyframes floatGlow{
+from{transform:translate(-60px,-40px);}
+to{transform:translate(60px,50px);}
 }
 
-/* ================= ANIMATIONS ================= */
-@keyframes beat{
-  0%,100%{transform:scale(1);}
-  50%{transform:scale(1.2);}
+/* MEMORY AREA GRID (ANTI NUMPUK) */
+.memoryBox{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+display:grid;
+grid-template-columns:repeat(4,160px);
+gap:30px;
 }
+
+/* FOTO */
+.memoryBox img{
+width:150px;
+height:190px;
+object-fit:cover;
+border-radius:15px;
+border:6px solid white;
+box-shadow:0 15px 35px rgba(255,105,180,.4);
+opacity:0;
+transform:scale(.5);
+transition:1s;
+}
+
+.memoryBox img.show{
+opacity:1;
+transform:scale(1);
+}
+
+/* FOTO TERAKHIR */
+.focus{
+box-shadow:
+0 0 20px #fff,
+0 0 40px #ffb6d9,
+0 0 70px #ff9ecb;
+transform:scale(1.08);
+}
+
+/* END TEXT FIX */
+.endText{
+position:absolute;
+top:18px;              /* naik lebih atas */
+left:50%;
+transform:translateX(-50%);
+font-size:26px;        /* lebih kecil */
+font-weight:700;
+color:#111;
+opacity:0;
+transition:2s;
+text-align:center;
+padding:8px 20px;
+}
+
+.endText.show{
+opacity:1;
+}
+
+/* CREDIT */
+.credit{
+position:absolute;
+bottom:18px;
+left:50%;
+transform:translateX(-50%);
+font-size:13px;
+font-weight:600;
+letter-spacing:1px;
+color:#111;
+opacity:0;
+transition:2s;
+}
+
+.credit.show{
+opacity:.65;
+}
+
 </style>
 </head>
+
 <body>
 
 <div class="decor" id="decor"></div>
 
+<!-- CARD -->
 <div class="closing-card" id="card">
-  <h2>Thank You For Reading 🤍</h2>
-  <p>
-    Semoga hari kamu selalu dipenuhi hal-hal baik,<br>
-    dan senyum kamu ga pernah hilang.
-  </p>
-  <div class="heart">🤍</div>
-  <span class="sign">— From: Farel</span>
+
+<h2>Thank You For Reading 🤍</h2>
+
+<p>
+Semoga hari kamu selalu dipenuhi hal baik,<br>
+dan senyum kamu ga pernah hilang.
+</p>
+
+<button class="nextSlideBtn" onclick="nextSlide()">
+Lihat Kenangan Kita ➜
+</button>
+
 </div>
 
-<div class="footer-note">Built by Farel</div>
+<!-- MEMORY -->
+<div class="memorySlide" id="memorySlide">
+
+<div class="pinkGlow"></div>
+<div class="pinkGlow" style="right:0;bottom:0;"></div>
+
+<div class="memoryBox">
+
+<div class="memoryBox">
+    <img src="img/foto1.jpg">
+    <img src="img/foto2.jpg">
+    <img src="img/foto3.jpg">
+    <img src="img/foto4.jpg">
+    <img src="img/foto5.jpg">
+    <img src="img/foto6.jpg">
+    <img src="img/foto7.jpg">
+    <img src="img/foto8.jpg">
+</div>
+
+</div>
+
+<div class="endText" id="endText">
+Happy to meet you in my life<br>
+Cheers to more memories! 🥂
+</div>
+
+<div class="credit" id="credit">
+Built by Farel
+</div>
+
+</div>
+
+<audio id="bgMusic" src="music/foundyou.mp3"></audio>
 
 <script>
-/* ================= BACKGROUND DECOR ================= */
-const decor=document.getElementById("decor");
-const icons=["🤍","🌸","✨","💗","💮"];
 
-for(let i=0;i<30;i++){
-  let el=document.createElement("div");
-  el.className="item";
-  el.innerHTML=icons[Math.floor(Math.random()*icons.length)];
-  el.style.left=Math.random()*100+"%";
-  el.style.animationDuration=(6+Math.random()*6)+"s";
-  el.style.animationDelay=Math.random()*5+"s";
-  decor.appendChild(el);
+/* FLOAT ICON */
+const decor=document.getElementById("decor");
+const icons=["🤍","🌸","✨","💗"];
+
+for(let i=0;i<25;i++){
+let el=document.createElement("div");
+el.className="item";
+el.innerHTML=icons[Math.floor(Math.random()*icons.length)];
+el.style.left=Math.random()*100+"%";
+el.style.animationDuration=(6+Math.random()*6)+"s";
+decor.appendChild(el);
 }
 
-/* ================= SHOW CLOSING CARD ================= */
-const card=document.getElementById("card");
+/* SHOW CARD */
 setTimeout(()=>{
-  card.classList.add("show");
-},800); // delay biar agak dreamy
+card.classList.add("show");
+},800);
+
+/* NEXT */
+function nextSlide(){
+
+document.getElementById("bgMusic").play();
+
+card.style.opacity="0";
+card.style.transform="translateX(-120px)";
+
+setTimeout(()=>{
+memorySlide.classList.add("show");
+showMemories();
+},700);
+}
+
+/* FOTO MUNCUL SATU2 */
+function showMemories(){
+
+const photos=document.querySelectorAll(".memoryBox img");
+
+photos.forEach((img,i)=>{
+setTimeout(()=>{
+img.classList.add("show");
+},i*400);
+});
+
+/* FOCUS FOTO TERAKHIR */
+/* SEMUA FOTO GLOW BARENG */
+setTimeout(()=>{
+
+photos.forEach(img=>{
+img.classList.add("focus");
+});
+
+},photos.length*400+600);
+
+/* END TEXT */
+setTimeout(()=>{
+document.getElementById("endText")
+.classList.add("show");
+},photos.length*400+2200);
+
+/* CREDIT BUILT BY */
+setTimeout(()=>{
+document.getElementById("credit")
+.classList.add("show");
+},photos.length*400+3500);
+
+}
+
 </script>
 
 </body>
