@@ -39,6 +39,7 @@ body{
 @keyframes muncul{
   to{opacity:1;transform:translateY(0);}
 }
+/* Delay satu-satu biar munculnya rapi, termasuk kata OCA */
 .text span:nth-child(1){animation-delay:0.2s;}
 .text span:nth-child(2){animation-delay:0.4s;}
 .text span:nth-child(3){animation-delay:0.6s;}
@@ -50,6 +51,9 @@ body{
 .text span:nth-child(9){animation-delay:1.8s;}
 .text span:nth-child(10){animation-delay:2s;}
 .text span:nth-child(11){animation-delay:2.2s;}
+.text span:nth-child(12){animation-delay:2.4s;}
+.text span:nth-child(13){animation-delay:2.6s;}
+.text span:nth-child(14){animation-delay:2.8s;}
 
 /* ================= GARDEN ================= */
 #garden{
@@ -60,7 +64,6 @@ body{
   transition: opacity 1.5s ease, filter 1.5s ease;
 }
 
-/* STEM */
 .stem{
   position:absolute;
   bottom:0;
@@ -73,7 +76,6 @@ body{
   to{height:150px;}
 }
 
-/* FLOWER */
 .flower{
   position:absolute;
   transform:translate(-50%,0) scale(0);
@@ -83,7 +85,6 @@ body{
   to{transform:translate(-50%,0) scale(1);}
 }
 
-/* CENTER */
 .center{
   position:absolute;
   top:50%;
@@ -96,7 +97,6 @@ body{
   z-index:2;
 }
 
-/* PETALS */
 .petal{
   position:absolute;
   top:50%;
@@ -121,7 +121,6 @@ body{
 .p7{transform:translate(-50%,-100%) rotate(270deg);animation-delay:2.4s;}
 .p8{transform:translate(-50%,-100%) rotate(315deg);animation-delay:2.6s;}
 
-/* LEAVES */
 .leaf{
   position:absolute;
   width:30px;
@@ -136,7 +135,6 @@ body{
   to{opacity:1;}
 }
 
-/* PARTICLES */
 .particle{
   position:absolute;
   width:4px;
@@ -152,7 +150,6 @@ body{
   100%{transform:translateY(-600px);opacity:0;}
 }
 
-/* BUTTERFLY */
 .butterfly{
   position:absolute;
   width:10px;
@@ -214,6 +211,7 @@ body{
   pointer-events:none;
   overflow:visible;
 }
+
 #cardPage{
   background:linear-gradient(135deg,#ff9a9e,#fad0c4);
   opacity:0;
@@ -227,6 +225,8 @@ body{
   transition:opacity 1.5s ease;
   overflow:hidden;
 }
+
+/* Biar kartu bisa di-scroll kalau kepanjangan */
 .card{
   background:white;
   padding:40px;
@@ -234,8 +234,14 @@ body{
   text-align:center;
   box-shadow:0 15px 35px rgba(0,0,0,.2);
   width:350px;
+  max-height: 80vh;
+  overflow-y: auto;
   animation:fadeIn 1.5s;
 }
+/* Scrollbar estetik */
+.card::-webkit-scrollbar { width: 6px; }
+.card::-webkit-scrollbar-thumb { background: #ff4d6d; border-radius: 10px; }
+
 #secret p, #secret img{
   opacity:0;
   margin-bottom:10px;
@@ -256,20 +262,20 @@ button{
   background:#ff4d6d;
   color:white;
   cursor:pointer;
+  font-weight: bold;
 }
 @keyframes fadeIn{
   from{opacity:0;transform:translateY(20px);}
   to{opacity:1;}
 }
 
-/* HEART FLOAT */
 .heart{
   position:absolute;
   color:#ff4d6d;
   animation:float 5s linear infinite;
+  pointer-events: none;
 }
 
-/* MINI PARTICLES KIRI-KANAN CARD */
 .miniParticle{
   position:absolute;
   width:6px;
@@ -288,33 +294,22 @@ button{
 </head>
 <body>
 
-<!-- TEXT -->
+<audio id="mySong" loop>
+  <source src="music/hbd.mp3" type="audio/mpeg">
+</audio>
+
 <div class="text">
-  <span>F</span>
-  <span>O</span>
-  <span>R</span>
-  <span>&nbsp;</span>
-  <span>P</span>
-  <span>R</span>
-  <span>E</span>
-  <span>T</span>
-  <span>T</span>
-  <span>Y</span>
-  <span>&nbsp;</span>
-  <span>O</span>
-  <span>C</span>
-  <span>A</span>
+  <span>F</span><span>O</span><span>R</span><span>&nbsp;</span>
+  <span>P</span><span>R</span><span>E</span><span>T</span><span>T</span><span>Y</span><span>&nbsp;</span>
+  <span>O</span><span>C</span><span>A</span>
 </div>
 
-<!-- FLOWER GARDEN -->
 <div id="garden"></div>
 
-<!-- ENVELOPE -->
 <div id="envelope">
   <div id="paper"></div>
 </div>
 
-<!-- CARD PAGE -->
 <div id="cardPage">
   <div class="card">
     <h1>Happy Birthday 🎉</h1>
@@ -322,19 +317,20 @@ button{
     <p>Hari ini spesial banget, karena dunia dikasih orang secantik & sebaik kamu.</p>
     <button onclick="showMessage()">Klik ini yaa 🥰</button>
     <div id="secret">
-      <img src="foto.jpg" alt="Ocha" id="secretImg">
+      <img src="img/owcaa.jpg" alt="Ocha" id="secretImg">
       <p>Semoga semua impian kamu tercapai, selalu sehat, selalu bahagia ❤️</p>
-      <p>Dan semoga aku masih jadi bagian dari cerita kamu ke depannya ✨</p>
+      <p>Jangan bosen-bosen ya, bakal ada banyak cerita seru lagi ke depannya ✨</p>
       <p>Glad to have a friend like you.</p>
       <button onclick="nextPage()" id="nextBtn" style="opacity:0;transition:1s;">
-Lanjut 💌
-</button>
+        Lanjut 💌
+      </button>
     </div>
   </div>
 </div>
 
 <script>
 const garden = document.getElementById("garden");
+const song = document.getElementById("mySong");
 
 // Partikel awal
 for(let i=0;i<50;i++){
@@ -422,78 +418,71 @@ for(let i=0;i<20;i++){
 // Envelope animation
 setTimeout(()=>{document.getElementById("envelope").style.transform="translate(-50%,-50%) scale(1)";},5500);
 
-// Envelope click smooth
-const envelope=document.getElementById("envelope");
-envelope.onclick=()=>{
-  // garden blur & fade
-  garden.style.opacity="0.3";
-  garden.style.filter="blur(5px)";
+// Amplop diklik: Nyalakan musik dan ganti tampilan
+const envelope = document.getElementById("envelope");
+envelope.onclick = () => {
+  // Nyalakan musik saat interaksi pertama
+  song.play().catch(e => console.log("Menunggu klik untuk audio"));
 
-  // hide text smoothly
+  garden.style.opacity = "0.3";
+  garden.style.filter = "blur(5px)";
+
   const textEl = document.querySelector(".text");
-  textEl.style.top="-120px";
-  textEl.style.opacity="0";
+  textEl.style.top = "-120px";
+  textEl.style.opacity = "0";
 
-  // envelope buka
   envelope.classList.add("open");
-  envelope.style.transform="translate(-50%,-80%) scale(0.9)";
+  envelope.style.transform = "translate(-50%,-80%) scale(0.9)";
 
-  // tampilkan card
-  setTimeout(()=>{
-    document.getElementById("cardPage").style.opacity=1;
-    document.getElementById("cardPage").style.pointerEvents="auto";
+  setTimeout(() => {
+    document.getElementById("cardPage").style.opacity = 1;
+    document.getElementById("cardPage").style.pointerEvents = "auto";
 
-    // tambahin mini particles kiri-kanan card
-    for(let i=0;i<50;i++){
+    for(let i=0; i<40; i++){
       const mini = document.createElement("div");
-      mini.className="miniParticle";
-      mini.style.left = Math.random()*100 + "vw";
-      mini.style.bottom = Math.random()*300 + "px";
-      mini.style.animationDuration = (2+Math.random()*2)+"s";
+      mini.className = "miniParticle";
+      mini.style.left = Math.random() * 100 + "vw";
+      mini.style.bottom = Math.random() * 300 + "px";
+      mini.style.animationDuration = (2 + Math.random() * 2) + "s";
       document.getElementById("cardPage").appendChild(mini);
     }
-  },1600);
+  }, 1600);
 
-  setTimeout(()=>{envelope.style.display="none";},2300);
+  setTimeout(() => { envelope.style.display = "none"; }, 2300);
 }
 
-// Show hidden message
 function showMessage(){
-  const img=document.querySelector("#secret img");
-  const paragraphs=document.querySelectorAll("#secret p");
-  const nextBtn=document.getElementById("nextBtn");
+  const img = document.querySelector("#secret img");
+  const paragraphs = document.querySelectorAll("#secret p");
+  const nextBtn = document.getElementById("nextBtn");
 
-  img.style.opacity=1;
-  img.style.transform="translateY(0)";
+  img.style.opacity = 1;
+  img.style.transform = "translateY(0)";
 
-  let delay=600;
-
-  paragraphs.forEach(p=>{
-    setTimeout(()=>{
-      p.style.opacity=1;
-    },delay);
-    delay+=600;
+  let delay = 600;
+  paragraphs.forEach(p => {
+    setTimeout(() => { p.style.opacity = 1; }, delay);
+    delay += 600;
   });
 
-  // tombol muncul setelah semua teks selesai
-  setTimeout(()=>{
-    nextBtn.style.opacity=1;
-  },delay);
+  setTimeout(() => { nextBtn.style.opacity = 1; }, delay);
 }
 
-// Floating hearts
 function createHeart(){
-  const h=document.createElement("div");
-  h.className="heart";
-  h.innerHTML="❤️";
-  h.style.left=Math.random()*100+"vw";
-  h.style.animationDuration=(2+Math.random()*3)+"s";
+  const h = document.createElement("div");
+  h.className = "heart";
+  h.innerHTML = "❤️";
+  h.style.left = Math.random() * 100 + "vw";
+  h.style.bottom = "0";
+  h.style.fontSize = (15 + Math.random() * 20) + "px";
+  h.style.animationDuration = (3 + Math.random() * 3) + "s";
   document.body.appendChild(h);
-  setTimeout(()=>h.remove(),5000);
+  setTimeout(() => h.remove(), 5000);
 }
-setInterval(createHeart,500);
+setInterval(createHeart, 500);
+
 function nextPage(){
-window.location.href="letter.html";
+  window.location.href = "letter.html";
 }
 </script>
 
